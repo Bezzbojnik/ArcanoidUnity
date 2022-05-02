@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    public float Speed;
 
     void Start()
     {
-        GetComponent<Rigidbody>().AddForce(new Vector3(100, 0, 100));
+        Respawn();
+        //GetComponent<Rigidbody>().AddForce(new Vector3(100, 0, 100));
     }
 
     private void OnTriggerEnter(Collider other)
@@ -15,5 +17,11 @@ public class Ball : MonoBehaviour
             Destroy(other.gameObject);
 
         }
+    }
+
+    public void Respawn()
+    {
+        transform.position = Vector3.zero;
+        GetComponent<Rigidbody>().velocity = Random.insideUnitSphere.normalized * Speed;
     }
 }
