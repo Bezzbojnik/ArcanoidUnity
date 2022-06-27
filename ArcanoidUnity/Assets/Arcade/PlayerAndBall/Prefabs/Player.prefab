@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4835787735271555885}
   - component: {fileID: 3660195237435993560}
   - component: {fileID: 3944111048294748337}
-  - component: {fileID: 8773594413783787294}
   - component: {fileID: 4555791967309524960}
   m_Layer: 0
   m_Name: Player
@@ -97,20 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0.3
---- !u!64 &8773594413783787294
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5351570102043703364}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &4555791967309524960
 BoxCollider:
   m_ObjectHideFlags: 0

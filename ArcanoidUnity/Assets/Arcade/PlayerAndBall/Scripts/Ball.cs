@@ -3,9 +3,11 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public float Speed;
+    public AudioClip[] AudioClips;
 
     private Rigidbody _rb;
     private Vector3 _velocity;
+    private AudioSource _audioSource;
 
     void Start()
     {
@@ -15,6 +17,7 @@ public class Ball : MonoBehaviour
         Debug.Log(_velocity);
         _rb.AddForce(_velocity, ForceMode.VelocityChange);
 
+        _audioSource = this.GetComponent<AudioSource>();
         //Respawn();
     }
 
@@ -26,6 +29,7 @@ public class Ball : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        RandomAudioPlay();
         ReflectProjectile(_rb, collision.contacts[0].normal);
         if (collision.gameObject.tag == "Enemy")
         {
@@ -37,5 +41,11 @@ public class Ball : MonoBehaviour
     {
         _velocity = Vector3.Reflect(_velocity, reflectVector);
         _rb.velocity = _velocity;
+    }
+
+    private void RandomAudioPlay()
+    {
+        _audioSource.clip = AudioClips[Random.Range(0, AudioClips.Length)];
+        _audioSource.Play();
     }
 }
