@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
-
     public float Speed;
-
-    private float _accuracity = 0.1f;
 
     void Update()
     {

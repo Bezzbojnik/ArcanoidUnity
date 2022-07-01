@@ -4,7 +4,6 @@ public class Ball : MonoBehaviour
 {
     public float Speed;
     public AudioClip[] AudioClips;
-    public AudioClip WinAudio;
 
     private Rigidbody _rb;
     private Vector3 _velocity;
@@ -33,18 +32,13 @@ public class Ball : MonoBehaviour
         ReflectProjectile(_rb, collision.contacts[0].normal);
         if (collision.gameObject.tag == "Enemy")
         {
-            var enemy = GameManager.Instance.Enemys.Find(x => x == collision.gameObject);
-            GameManager.Instance.Enemys.Remove(enemy);
-            Destroy(collision.gameObject.gameObject);
+            MainScene.Instance.DestroyEnemy(collision.gameObject);
 
-            if(GameManager.Instance.Enemys.Count == 0)
-            {
-                MainScene.Instance.PanelWin.SetActive(true);
-                _velocity = new Vector3(0, 0, 0);
-                _rb.velocity = _velocity;
-                _audioSource.clip = WinAudio;
-                _audioSource.Play();
-            }
+            //if(MainScene.Instance.Enemys.Count == 0)
+            //{
+            //    _velocity = new Vector3(0, 0, 0);
+            //    _rb.velocity = _velocity;
+            //}
         }
     }
 
