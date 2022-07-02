@@ -31,16 +31,17 @@ public class MainScene : MonoBehaviour
     {
         var locEnemy = MainScene.Instance.Enemys.Find(x => x == enemy);
         Enemys.Remove(locEnemy);
-        Destroy(enemy);
+        enemy.GetComponent<Enemy>().OnDestroyEnemy();
 
         if (Enemys.Count == 0)
         {
-            EventManager.OnWinStopBall();
+            EventManager.OnStopBall.Invoke();
 
             var numberScene = GameManager.NumberScene;
             if (numberScene++ > SceneManager.sceneCount)
             {
                 PanelWinAllGame.SetActive(true);
+                ActivateAudioWin();
                 return;
             }
 

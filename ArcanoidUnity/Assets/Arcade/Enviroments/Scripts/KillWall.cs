@@ -6,7 +6,7 @@ public class KillWall : MonoBehaviour
     {
         if(collision.transform.tag == "Ball")
         {
-            Destroy(collision.transform.gameObject);
+            EventManager.OnStopBall?.Invoke();
             MainScene.Instance.PanelLose.SetActive(true);
             MainScene.Instance.ActivateAudioLose();
         }

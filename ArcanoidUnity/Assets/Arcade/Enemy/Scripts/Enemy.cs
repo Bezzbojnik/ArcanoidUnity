@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public ParticleSystem Explosions;
     public bool IsMove;
 
+    private AudioSource _audioSource;
     private float directionRight;
 
     // Start is called before the first frame update
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         directionRight = 1f * Time.deltaTime;
     }
 
@@ -37,5 +38,14 @@ public class Enemy : MonoBehaviour
         }
 
         transform.position = new Vector3(transform.position.x + directionRight, transform.position.y, transform.position.z);
+    }
+
+    public void OnDestroyEnemy()
+    {
+        Explosions.Play();
+        _audioSource.Play();
+        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<Collider>().enabled = false;
+        Destroy(gameObject, 0.3f);
     }
 }

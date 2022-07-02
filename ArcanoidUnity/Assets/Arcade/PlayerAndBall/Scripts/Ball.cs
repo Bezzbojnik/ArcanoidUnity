@@ -11,7 +11,6 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
-        EventManager.StopBall += StopBall;
         _rb = this.GetComponent<Rigidbody>();
 
         _velocity = new Vector3(1 * Speed, 1 * Speed, 1 * Speed);
@@ -19,6 +18,7 @@ public class Ball : MonoBehaviour
 
         _audioSource = this.GetComponent<AudioSource>();
         Respawn();
+        EventManager.OnStopBall += StopBall;
     }
 
     public void Respawn()
@@ -34,12 +34,6 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             MainScene.Instance.DestroyEnemy(collision.gameObject);
-
-            //if(MainScene.Instance.Enemys.Count == 0)
-            //{
-            //    _velocity = new Vector3(0, 0, 0);
-            //    _rb.velocity = _velocity;
-            //}
         }
     }
 
@@ -55,10 +49,10 @@ public class Ball : MonoBehaviour
         _audioSource.Play();
     }
 
-    private void StopBall()
+    public void StopBall()
     {
         _velocity = new Vector3(0, 0, 0);
         _rb.velocity = _velocity;
-        EventManager.StopBall -= StopBall;
+        EventManager.OnStopBall -= StopBall;
     }
 }
