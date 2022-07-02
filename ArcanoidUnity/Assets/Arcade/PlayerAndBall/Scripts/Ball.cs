@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
+        EventManager.StopBall += StopBall;
         _rb = this.GetComponent<Rigidbody>();
 
         _velocity = new Vector3(1 * Speed, 1 * Speed, 1 * Speed);
@@ -52,5 +53,12 @@ public class Ball : MonoBehaviour
     {
         _audioSource.clip = AudioClips[Random.Range(0, AudioClips.Length)];
         _audioSource.Play();
+    }
+
+    private void StopBall()
+    {
+        _velocity = new Vector3(0, 0, 0);
+        _rb.velocity = _velocity;
+        EventManager.StopBall -= StopBall;
     }
 }

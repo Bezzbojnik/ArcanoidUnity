@@ -7,6 +7,7 @@ public class MainScene : MonoBehaviour
     public static MainScene Instance;
     public GameObject PanelLose;
     public GameObject PanelWin;
+    public GameObject PanelWinAllGame;
     public AudioClip WinAudio;
     public AudioClip LoseAudio;
 
@@ -34,6 +35,15 @@ public class MainScene : MonoBehaviour
 
         if (Enemys.Count == 0)
         {
+            EventManager.OnWinStopBall();
+
+            var numberScene = GameManager.NumberScene;
+            if (numberScene++ > SceneManager.sceneCount)
+            {
+                PanelWinAllGame.SetActive(true);
+                return;
+            }
+
             PanelWin.SetActive(true);
             ActivateAudioWin();
         }
@@ -44,6 +54,12 @@ public class MainScene : MonoBehaviour
         PanelWin.SetActive(false);
         GameManager.NumberScene++ ;
         SceneManager.LoadScene($"Level {GameManager.NumberScene}");
+    }
+
+    public void WinAllGame()
+    {
+        GameManager.NumberScene = 0;
+        SceneManager.LoadScene("Menu");
     }
 
     public void ActivateAudioWin()
